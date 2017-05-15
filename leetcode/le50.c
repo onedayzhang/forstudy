@@ -11,7 +11,7 @@ double myPow(double x, int n) {
 	}
 	else
 	{
-		return x*myPow(x,int (n-1)/2)*myPow(x,(n-1)/2);
+		return x*myPow(x,(n-1)/2)*myPow(x,(n-1)/2);
 	}
 }
 
