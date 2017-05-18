@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 bool checkPalindrome(char *src, int start,int end)
 {
 	if(start==end)
@@ -16,5 +17,16 @@ bool checkPalindrome(char *src, int start,int end)
 }
 
 char* longestPalindrome(char* s) {
-    
+    int lenth;
+	int start,int end;
+	int i;
+	if(s==NULL)
+	return NULL;
+	start=0
+	end=lenth=strlen(s);
+	for(i=0;i<lenth;i++)
+	{
+		if(checkPalindrome(start))
+	}
+
 }
