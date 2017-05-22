@@ -13,7 +13,7 @@ char* convert(char* s, int numRows) {
 		return s;
 	}
 	length=strlen(s);
-	char* res =malloc(sizeof(char)*length);
+	char* res =malloc(sizeof(char)*length+1);
 	
 	for(i=0;i<numRows;i++)
 	{
@@ -29,6 +29,7 @@ char* convert(char* s, int numRows) {
 			}
 		}
 	}
+	res[num]='\0';
 	return res;
 }
 
