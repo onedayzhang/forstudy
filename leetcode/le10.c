@@ -11,13 +11,14 @@ bool isMatch(char* s, char* p) {
 	}
 	if(*(p+1)!='*')
 	{
-		if(*p == *s ||*p=='.')
+		if(*p == *s ||(*p=='.'&&*s!='\0'))
 		{
 			return isMatch(s+1,p+1);
 		}
 	}
 	else
 	{
+		#if 0
 		if(*p!=*s&&*p!='.')
 		{
 			return isMatch(s,p+2);
@@ -26,6 +27,16 @@ bool isMatch(char* s, char* p) {
 		{
 			return isMatch(s+1,p);
 		}
+		#endif
+		while(*p==*s||(*p=='.'&&*s!='\0'))
+		{
+			if(isMatch(s,p+2))
+			{
+				return true;
+			}
+			s++;
+		}
+		return isMatch(s,p+2);
 	}
 	return false;
 }
