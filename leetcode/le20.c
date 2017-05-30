@@ -2,18 +2,20 @@
 #include <stdbool.h>
 
 
-char num[1024];
+char num[4096];
 int position;
 
 int create_stack()
 {
 //	num[1024]={0};
 	position=0;
+	return 0;
 }
 int stack_push(char src)
 {
 	num[position]=src;
-	position++;	
+	position++;
+	return 0;	
 }
 char stack_pop()
 {
