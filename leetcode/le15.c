@@ -45,6 +45,29 @@ int quick_sort(int *num,int start,int end)
   * Note: The returned array must be malloced, assume caller calls free().
    */
 int** threeSum(int* nums, int numsSize, int* returnSize) {
+	int **res;
+	quick_sort(nums,0 numsSize-1);
+	int i,j,k;
+	for(i=0;i<numsSize-1-2;i++)
+	{
+		j=i+1;
+		k=numsSize-1;
+		while(j<k)
+		{
+			if((num[i]+num[j]+num[k])<0)
+			{
+				j++;
+			}
+			else if((num[i]+num[j]+num[k])>0)
+			{
+				j--;
+			}
+			else
+			{
+				*res
+			}
+		}
+	}
 	return NULL;
 }
 
