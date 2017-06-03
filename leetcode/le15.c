@@ -1,13 +1,14 @@
 #include <stdio.h>
-
+#include <malloc.h>
 int swap(int *a,int *b)
 {
 	int tmp=*b;
 	*b=*a;
 	*a=tmp;
+	return 0;
 }
 
-int quick_sort(int *num,int start,int end)
+void quick_sort(int *num,int start,int end)
 {
 	int i,j,k;
 	i=start;j=end;
@@ -45,38 +46,64 @@ int quick_sort(int *num,int start,int end)
   * Note: The returned array must be malloced, assume caller calls free().
    */
 int** threeSum(int* nums, int numsSize, int* returnSize) {
-	int **res;
-	quick_sort(nums,0 numsSize-1);
 	int i,j,k;
-	for(i=0;i<numsSize-1-2;i++)
+	int **res=NULL;
+	int size=0;
+    int total=64;
+	int n;
+	res=(int**)malloc(sizeof(int*)*total);
+    for(i = 0; i < total; ++i)
+        res[i] = (int *)malloc(sizeof(int) * 3);
+	quick_sort(nums,0,numsSize-1);
+	for(i=0;i<numsSize-2;i++)
 	{
+		if(i>0 && nums[i]==nums[i-1])
+		{
+			continue;
+		}
 		j=i+1;
 		k=numsSize-1;
 		while(j<k)
 		{
-			if((num[i]+num[j]+num[k])<0)
+			if((nums[i]+nums[j]+nums[k])<0)
 			{
 				j++;
 			}
-			else if((num[i]+num[j]+num[k])>0)
+			else if((nums[i]+nums[j]+nums[k])>0)
 			{
-				j--;
+				k--;
 			}
 			else
 			{
-				*res
+				res[size][0]=nums[i];
+				res[size][1]=nums[j];
+				res[size][2]=nums[k];
+				while(j<k && res[size][1]==nums[j])
+				j++;
+				while(j<k && res[size][2]==nums[k])
+				k--;
+				size++;
+				if(size==total)
+                {
+                    total<<=1;
+                    res=(int**)realloc(res,sizeof(int*)*total);    
+                    for(n = size; n < total; ++n)
+                        res[n] = (int *)malloc(sizeof(int) * 3);
+                }
 			}
 		}
 	}
-	return NULL;
+	*returnSize=size;
+	return res;
 }
 
 int main()
 {
 	int i;
-	int a[10]={123,23,3,45,67,78,12,98,121,23};
-	quick_sort(a,0,9);
-	for(i=0;i<10;i++)
-	printf("%d ",a[i]);
-	printf("\n");
+//	int a[10]={123,23,3,45,67,78,12,98,121,23};
+	int a[6] = {-1,0,1,2,-1,-4};
+	threeSum(a,6,&i);
+//	for(i=0;i<10;i++)
+//	printf("%d ",a[i]);
+//	printf("\n");
 }
