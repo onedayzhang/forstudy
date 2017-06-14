@@ -3,37 +3,36 @@
 #include <string.h>
 char* longestCommonPrefix(char** strs, int strsSize) {
     int i,j,ressize,msize=0;
+    if(strsSize<1)
+    return "";	
     ressize=strlen(strs[0]);
-    if(strs==NULL||strsSize==0||ressize==0)
-    return "";
-    char *res=malloc(ressize+1);
-    msize=ressize;
+    char *res=malloc(sizeof(char)*(ressize+1));
+	strcpy(res,strs[0]);
     for(i=1;i<strsSize;i++)
     {
-        for(j=0;j<msize&&strs[i][j]!='\0';j++)
+    	msize=0;
+        for(j=0;j<ressize;j++)
         {
-            if(strs[0][j]!=strs[i][j])
+            if(res[j]==strs[i][j])
             {
-                if(j<msize) 
-                    msize=j;
-                    break;
+                 msize++;
             }
-        }
+			else
+			{
+				if(msize==0)
+					return "";
+				res[msize]='\0';
+			}
+        }		
     }
-    if(msize==0)
-        return "";
-    for(i=0;i<msize;i++)
-    {
-        res[i]=strs[0][i];
-    }
-    res[i]='\0';
     return res;
 }
 
+
 int main()
 {
-//    char* a[5]={"abcdef","abcdfe","abcdfef","abcdefe","abcdcf"};
-    char*a[]={};
-    printf("%s\n",longestCommonPrefix(a,0));
+	//    char* a[5]={"abcdef","abcdfe","abcdfef","abcdefe","abcdcf"};
+	char*a[1]={"a"};
+    printf("%s\n",longestCommonPrefix(a,1));
     return 0;
 }
