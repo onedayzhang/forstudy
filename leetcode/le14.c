@@ -5,7 +5,7 @@ char* longestCommonPrefix(char** strs, int strsSize) {
     int i,j,ressize,msize=0;
     ressize=strlen(strs[0]);
     if(strs==NULL||strsSize==0||ressize==0)
-    return NULL;
+    return "";
     char *res=malloc(ressize+1);
     msize=ressize;
     for(i=1;i<strsSize;i++)
@@ -14,10 +14,14 @@ char* longestCommonPrefix(char** strs, int strsSize) {
         {
             if(strs[0][j]!=strs[i][j])
             {
-                msize=j;
+                if(j<msize) 
+                    msize=j;
+                    break;
             }
         }
     }
+    if(msize==0)
+        return "";
     for(i=0;i<msize;i++)
     {
         res[i]=strs[0][i];
