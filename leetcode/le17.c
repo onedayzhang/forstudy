@@ -1,16 +1,21 @@
-
-int backtracing(char *digits,char**phone_num,int *returnSize,char **res)
+#include <stdio.h>
+#include <malloc.h>
+int backtracing(char *digits,char**phone_num,int *returnSize,int start,char **res)
 {
 	if(*digits=='\0')
 	{
-		push('\0');
+		//push('\0');
+		res[*returnSize][start]='\0';
 		(*returnSize)++;
+		start=0;
 		return 0;
 	}
 	for(;phone_num[*digits-'0']!=NULL&&*phone_num[*digits-'0']!='\0';phone_num[*digits-'0']++)
 	{
-		push(*phone_num[*digits-'0']);
-	backtracing(digits+1,phone_num,)
+		//push(*phone_num[*digits-'0']);
+		res[*returnSize][start]=*phone_num[*digits-'0'];
+		start++;
+		backtracing(digits+1,phone_num,returnSize,start,res);
 	}
 }
 /**
@@ -33,11 +38,22 @@ char** letterCombinations(char* digits, int* returnSize) {
    						};
 	char **res=malloc(sizeof(char)*5*4*4);
 	*returnSize=0;
-	backtracing(digits,phone_num,int * returnSize,res)
-	
+	int start=0;
+	backtracing(digits,phone_num,returnSize,start,res);
+	return res;
 }
 
-int main()
+int main(int argc,char *argv[])
 {
-	
+	int returnsize;
+	char**res;
+	if(argv[1]!=NULL)
+	{
+		res=letterCombinations(argv[1],&returnsize);
+	}
+	for(int i=0;i<returnsize;i++)
+	{
+		printf("%s",res[i]);
+	}
 }
+
