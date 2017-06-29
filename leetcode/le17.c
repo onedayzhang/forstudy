@@ -1,25 +1,54 @@
 #include <stdio.h>
 #include <malloc.h>
-int backtracing(char *digits,char**phone_num,int *returnSize,int start,char **res)
+
+char *phone_num[]={ NULL,
+					NULL,
+					"abc",
+					"def",
+					"ghi",
+					"jkl",
+					"mno",
+					"pqrs",
+					"tuv",
+					"wxyz",
+					NULL
+					};
+
+int backtracing(char *a,char *digits,int *returnSize,int start,char **res)
 {
 	if(*digits=='\0')
 	{
+		printf("start=%d\n",start);
 		//push('\0');
-		res[*returnSize][start]='\0';
-		printf("out%s\n",res[*returnSize]);
+		int i;
+		for(i=0;i<start;i++)
+		{
+			res[*returnSize][i]=a[i];
+		}
+		res[*returnSize][i]='\0';
+		printf("out= %s\n",res[*returnSize]);
 		(*returnSize)++;
 		
 		start=0;
 		return 0;
 	}
-	printf("digits %s\n",digits);
+	
 	for(;phone_num[*digits-'0']!=NULL&&*phone_num[*digits-'0']!='\0';phone_num[*digits-'0']++)
 	{
 		//push(*phone_num[*digits-'0']);
-		res[*returnSize][start]=*phone_num[*digits-'0'];
-		printf("%c\n",*phone_num[*digits-'0']);
+//		res[*returnSize][start]=*phone_num[*digits-'0'];
+		a[start]=*phone_num[*digits-'0'];
+		printf("a[%d]=%c digits=%s\n",start,*phone_num[*digits-'0'],digits);
 		start++;
-		backtracing(digits+1,phone_num,returnSize,start,res);
+		digits++;		
+		printf("digits=%s\n",digits);
+		if(start!=2)
+		{			
+			printf("*phone_num[*digits-'0']=%c\n",*phone_num[4]);
+		}
+		backtracing(a,digits,returnSize,start,res);
+		start--;
+		digits--;
 	}
 }
 /**
@@ -28,18 +57,6 @@ int backtracing(char *digits,char**phone_num,int *returnSize,int start,char **re
 */
 char** letterCombinations(char* digits, int* returnSize) {
 
-	char *phone_num[]={ NULL,
-					    NULL,
-					    "abc",
-					    "def",
-   						"ghi",
-   						"jkl",
-   						"mno",
-   						"pqrs",
-   						"tuv",
-   						"wxyz",
-   						NULL
-   						};
 	char **res=malloc(sizeof(char*)*4*4);
 	for(int i=0;i<4*4;i++)
 	{
@@ -47,7 +64,8 @@ char** letterCombinations(char* digits, int* returnSize) {
 	}
 	*returnSize=0;
 	int start=0;
-	backtracing(digits,phone_num,returnSize,start,res);
+	char a[2];
+	backtracing(a,digits,returnSize,start,res);
 	return res;
 }
 
@@ -60,9 +78,11 @@ int main(int argc,char *argv[])
 		res=letterCombinations(argv[1],&returnsize);
 	}
 	printf("return %d\n",returnsize);
+	#if 0
 	for(int i=0;i<returnsize;i++)
 	{
 		printf("%s",res[i]);
 	}
+	#endif
 }
 
