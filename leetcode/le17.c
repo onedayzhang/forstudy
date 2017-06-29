@@ -18,7 +18,7 @@ int backtracing(char *a,char *digits,int *returnSize,int start,char **res)
 {
 	if(*digits=='\0')
 	{
-		printf("start=%d\n",start);
+//		printf("start=%d\n",start);
 		//push('\0');
 		int i;
 		for(i=0;i<start;i++)
@@ -33,18 +33,18 @@ int backtracing(char *a,char *digits,int *returnSize,int start,char **res)
 		return 0;
 	}
 	
-	for(;phone_num[*digits-'0']!=NULL&&*phone_num[*digits-'0']!='\0';phone_num[*digits-'0']++)
+	for(int i=0;phone_num[*digits-'0']!=NULL&&*(phone_num[*digits-'0']+i)!='\0';i++)
 	{
 		//push(*phone_num[*digits-'0']);
 //		res[*returnSize][start]=*phone_num[*digits-'0'];
-		a[start]=*phone_num[*digits-'0'];
-		printf("a[%d]=%c digits=%s\n",start,*phone_num[*digits-'0'],digits);
+		a[start]=*(phone_num[*digits-'0']+i);
+		//printf("a[%d]=%c digits=%s\n",start,*phone_num[*digits-'0'+i],digits);
 		start++;
 		digits++;		
-		printf("digits=%s\n",digits);
+	//	printf("digits=%s\n",digits);
 		if(start!=2)
 		{			
-			printf("*phone_num[*digits-'0']=%c\n",*phone_num[4]);
+//			printf("*phone_num[*digits-'0']=%c\n",*phone_num[*digits-'0'+i]);
 		}
 		backtracing(a,digits,returnSize,start,res);
 		start--;
