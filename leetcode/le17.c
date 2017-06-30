@@ -26,7 +26,7 @@ int backtracing(char *a,char *digits,int *returnSize,int start,char **res)
 			res[*returnSize][i]=a[i];
 		}
 		res[*returnSize][i]='\0';
-		printf("out= %s\n",res[*returnSize]);
+//		printf("out= %s\n",res[*returnSize]);
 		(*returnSize)++;
 		
 		start=0;
@@ -42,14 +42,15 @@ int backtracing(char *a,char *digits,int *returnSize,int start,char **res)
 		start++;
 		digits++;		
 	//	printf("digits=%s\n",digits);
-		if(start!=2)
-		{			
+//		if(start!=2)
+//		{			
 //			printf("*phone_num[*digits-'0']=%c\n",*phone_num[*digits-'0'+i]);
-		}
+//		}
 		backtracing(a,digits,returnSize,start,res);
 		start--;
 		digits--;
 	}
+	return 0;
 }
 /**
 * Return an array of size *returnSize.
