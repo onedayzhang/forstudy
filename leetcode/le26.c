@@ -10,6 +10,10 @@ int removeDuplicates(int* nums, int numsSize) {
 		if(nums[i]==nums[j])
 		{
 			j++;
+			if(j==numsSize)
+			{
+				i++;
+			}
 		}
 		else
 		{
@@ -25,8 +29,8 @@ int removeDuplicates(int* nums, int numsSize) {
 
 int main()
 {
-	int a[10]={1,2,3,3,5,5,7,7,8,9};
-	printf("%d\n",removeDuplicates(a,10));
+	int a[2]={1,1};
+	printf("%d\n",removeDuplicates(a,2));
 	for(int i=0;i<10;i++)
 	{
 		printf("%d ",a[i]);
