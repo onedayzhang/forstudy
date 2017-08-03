@@ -32,6 +32,16 @@ struct ListNode* swapPairs(struct ListNode* head) {
 	return head;
 }
 
+struct ListNode* swapPairs_recurse(struct ListNode* head) {
+	if(head==NULL||head->next==NULL)
+		return head;
+	struct ListNode* tmp
+	tmp=head->next;
+	head=head->next;
+	head->next=tmp;
+	swapPairs_recurse()
+}
+
 int main()
 {
 	return 0;
