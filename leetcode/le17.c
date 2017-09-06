@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <malloc.h>
-
+#include <math.h>
+#include <string.h>
 char *phone_num[]={ NULL,
 					NULL,
 					"abc",
@@ -16,6 +17,7 @@ char *phone_num[]={ NULL,
 
 int backtracing(char *a,char *digits,int *returnSize,int start,char **res)
 {
+	int i;
 	if(*digits=='\0')
 	{
 //		printf("start=%d\n",start);
@@ -33,7 +35,7 @@ int backtracing(char *a,char *digits,int *returnSize,int start,char **res)
 		return 0;
 	}
 	
-	for(int i=0;phone_num[*digits-'0']!=NULL&&*(phone_num[*digits-'0']+i)!='\0';i++)
+	for(i=0;phone_num[*digits-'0']!=NULL&&*(phone_num[*digits-'0']+i)!='\0';i++)
 	{
 		//push(*phone_num[*digits-'0']);
 //		res[*returnSize][start]=*phone_num[*digits-'0'];
@@ -58,32 +60,44 @@ int backtracing(char *a,char *digits,int *returnSize,int start,char **res)
 */
 char** letterCombinations(char* digits, int* returnSize) {
 
-	char **res=malloc(sizeof(char*)*4*4);
-	for(int i=0;i<4*4;i++)
+	int i;
+    int size=strlen(digits);
+    int m=1;
+    for(i=0;i<size;i++)
+    {
+        m=m*4;
+    }
+	char **res=malloc(sizeof(char*)*4*4*m);
+	for(i=0;i<4*4*m;i++)
 	{
 		res[i]=malloc(3*sizeof(char));
 	}
 	*returnSize=0;
+	if(size==0)
+		return NULL;
 	int start=0;
 	char a[2];
 	backtracing(a,digits,returnSize,start,res);
 	return res;
 }
 
+
 int main(int argc,char *argv[])
 {
 	int returnsize;
+	int i;
 	char**res;
 	if(argv[1]!=NULL)
 	{
 		res=letterCombinations(argv[1],&returnsize);
 	}
 	printf("return %d\n",returnsize);
-	#if 0
-	for(int i=0;i<returnsize;i++)
+	#if 1
+	for(i=0;i<returnsize;i++)
 	{
-		printf("%s",res[i]);
+		printf("%s ",res[i]);
 	}
+	printf("\n");
 	#endif
 }
 
