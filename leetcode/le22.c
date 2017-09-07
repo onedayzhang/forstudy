@@ -12,10 +12,11 @@ int backtracing(int n,int left,int right,char **res,int* returnSize,char *tmp,in
 		{
 			res[*returnSize][i]=tmp[i];
 		}
-		(*returnSize)++;
+		
 		res[*returnSize][i]='\0';
 		printf("out= %s\n",res[*returnSize]);
 		start=0;
+		(*returnSize)++;
 		return 0;
 	}
 
@@ -67,7 +68,7 @@ char** generateParenthesis(int n, int* returnSize) {
 int main(int argc,char * argv[])
 {
 	int returnSize;
-	char **res=NULL;
+	char **res;
 	int n=0;
 	int i;
 	if(argc<=1)
