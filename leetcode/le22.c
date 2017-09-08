@@ -14,7 +14,7 @@ int backtracing(int n,int left,int right,char **res,int* returnSize,char *tmp,in
 		}
 		
 		res[*returnSize][i]='\0';
-		printf("out= %s\n",res[*returnSize]);
+//		printf("out= %s\n",res[*returnSize]);
 		start=0;
 		(*returnSize)++;
 		return 0;
@@ -44,6 +44,7 @@ int backtracing(int n,int left,int right,char **res,int* returnSize,char *tmp,in
 		}
 		
 	}*/
+	return 0;
 }
 
 
@@ -55,14 +56,20 @@ char** generateParenthesis(int n, int* returnSize) {
 	int i;
 	int left=0,right=0;
 	int start=0;
-	char **res=malloc(sizeof(char*)*n*n);
-	for(i=0;i<2*n*n;i++)
+	int m=1;
+    for(i=1;i<n+1;i++)
+    {
+        m=m*i;
+    }
+	char **res=malloc(sizeof(char*)*m);
+	for(i=0;i<m;i++)
 	{
-		res[i]=malloc(sizeof(char)*n*n);
+		res[i]=malloc(sizeof(char)*2*n);
 	}
 	char tmp[1024]={0};
 	*returnSize=0;
 	backtracing(n,left,right,res,returnSize,tmp,start);
+	return res;
 }
 
 int main(int argc,char * argv[])
