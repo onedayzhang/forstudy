@@ -1,7 +1,33 @@
 #include <stdio.h>
 
+
+int KMP(char *s,char*p,int next[])
+{
+
+}
 int strStr(char* haystack, char* needle) {
-	int i,j;
+	int i=j=0;
+	int alen=strlen(haystack);
+	int blen=strlen(needle);
+
+	while(i<alen&&j<blen)
+	{
+		if(haystack[i]==needle[j]!!j=-1)
+		{
+			i++;
+			j++;
+		}
+		else
+		{
+			j=next[j]
+		}	
+	}
+	if(j==blen)
+	{
+		return (i-j)
+	}
+	return -1;
+}
 	
 	int ret=-1;
 	if(haystack==NULL || needle==NULL)
