@@ -3,12 +3,14 @@
 #include <limits.h>
 
 int divide(int dividend, int divisor) {
-	long long res=0;
+	int res=0;
 	if(!divisor||(dividend==INT_MIN&&divisor==-1))
 		return INT_MAX;
+	if(divisor==1)
+		return dividend;
 	int sign=(dividend<0)^(divisor<0)? -1:1;
-	long long u_dividend =abs(dividend);
-	long long u_divisor=abs(divisor);
+	unsigned int u_dividend =dividend<0? -dividend:dividend;
+	unsigned int u_divisor=divisor<0? -divisor:divisor;;
 	while(u_dividend>=u_divisor)
 	{
 		long long tmp=u_divisor,multi=1;
