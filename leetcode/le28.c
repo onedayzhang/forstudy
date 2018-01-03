@@ -19,12 +19,12 @@ int strStr(char* haystack, char* needle) {
 		}
 		else
 		{
-			j=next[j]
+			j=next[j];
 		}	
 	}
 	if(j==blen)
 	{
-		return (i-j)
+		return (i-j);
 	}
 	return -1;
 }
