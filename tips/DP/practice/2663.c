@@ -1,5 +1,5 @@
 // http://poj.org/problem?id=2663
-
+#include <stdio.h>
 int calnum(int n)
 {
 	int pre2=0,pre1=0;
@@ -10,8 +10,8 @@ int calnum(int n)
 		return 3;
 	if(n%2!=0)
 		return 0;
-	pre2=0;pre1=3;
-	for(i=2;2(i-1)<n;i++)
+	pre2=1;pre1=3;
+	for(i=1;i<=n/2-1;i++)
 	{
 		sum=4*pre1-1*pre2;
 		pre2=pre1;
@@ -22,7 +22,7 @@ int calnum(int n)
 
 
 
-int main()
+int main(int argc,char *argv[])
 {
-	printf("%d\n",calnum(7));
+	printf("%d\n",calnum(atoi(argv[1])));
 }
