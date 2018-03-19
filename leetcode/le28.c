@@ -43,6 +43,13 @@ int strStr(char* haystack, char* needle) {
 	char *b=needle;
 	int alen=strlen(a);
 	int blen=strlen(b);
+	int next[blen];
+	getnext(b,next);
+	for(i=0;i<blen;i++)
+	{
+		printf("%d ",next[i]);
+	}
+	printf("\n");
 	i=0;j=0;
 	while(i<alen &&j<blen)
 	{
@@ -63,9 +70,26 @@ int strStr(char* haystack, char* needle) {
 		return -1;
 
 }
-int getnext(char *target)
+int getnext(char *n,int next[])
 {
-	
+	int i,j;
+	int len=strlen(n);
+	next[0]=-1;
+	i=0;
+	j=-1;
+	while(i<len-1)
+	{
+		if(n[i]==n[j]||j==-1)
+		{
+			i++;
+			j++;
+			next[i]=j;
+		}
+		else
+		{
+			j=next[j];
+		}
+	}
 }
 int main(int argc,char* argv[])
 {
