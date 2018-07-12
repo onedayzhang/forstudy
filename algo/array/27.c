@@ -3,20 +3,13 @@ public:
     int removeElement(vector<int>& nums, int val) {
 		if(nums.size()<1)
 			return nums.size();
-		int i=0;int j=1
-		while(i<nums.size())
+		int i=0;int j=nums.size()-1;
+		while(i<=j)
 		{
 			if(nums[i]==val)
 			{
-				if(j<nums.size())
-				{
-					nums[i]=nums[j];
-				}
-				else
-				{
-					break;
-				}
-
+				nums[i]=nums[j];
+				j--;
 			}
 			else
 			{
