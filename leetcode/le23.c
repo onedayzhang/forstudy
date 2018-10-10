@@ -1,58 +1,41 @@
+#include <stream>
 
-struct ListNode* mergeTwoLists(struct ListNode* l1, struct ListNode* l2) {
-	if(l1==NULL&&l2==NULL)	return NULL;
-	if(l1==NULL) return l2;
-	if(l2==NULL) return l1;
-	struct ListNode *head=NULL,*cur=NULL;
-	if(l1->val>l2->val)
-	{
-		head=l2;
-		l2=l2->next;
-	}
-	else
-	{
-		head=l1;
-		l1=l1->next;
-	}
-	cur=head;
-	while(l1!=NULL&&l2!=NULL)
-	{
-		if(l1->val>l2->val)
-		{
-			cur->next=l2;
-			l2=l2->next;
-		}
-		else
-		{
-			cur->next=l1;
-			l1=l1->next;
-		}
-		cur=cur->next;
-	}
-	if(l1!=NULL)
-		cur->next=l1;
-	if(l2!=NULL)
-		cur->next=l2;
-	return head;
+using namespace std
+struct ListNode {
+     int val;
+     ListNode *next;
+     ListNode(int x) : val(x), next(NULL) {}
 }
-
-/*tion for singly-linked list.
- * struct ListNode {
- *     int val;
- *     struct ListNode *next;
- * };
- */
-struct ListNode* mergeKLists(struct ListNode** lists, int listsSize) {
-    
+ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
+    if(l1==l2) return l1;
+    if(!l1) return l2;
+    if(!l2) return l1;
+    if(l1->val>l2->val) return mergeTwoLists(l2, l1);
+    ListNode* newl2 = new ListNode(0); newl2->next = l2;
+    ListNode* p1 = l1;
+    while (p1->next && newl2->next) {
+        if (p1->next->val<newl2->next->val) {
+            p1 = p1->next;
+        } else {
+            ListNode* temp = p1->next;
+            p1->next = newl2->next;
+            newl2->next = newl2->next->next;
+            p1->next->next = temp;
+            p1 = p1->next;
+        }
+    }
+    if(!p1->next) p1->next = newl2->next;
+    delete newl2;
+    return l1;
 }
 
 ListNode* domerge(vector<ListNode*>& lists,int left,int right)
 {
 	if(left==right) return lists[left];
-	if(left+1=right) mergeTwoLists(lists[left],lists[right])
-	ListNode* l1=domerge(lists,0,left+right/2);
-	ListNode* l2=domerge(lists,left+right/2+1,right);
-	mergeTwoLists(l1,l2);
+	if(left+1==right) return mergeTwoLists(lists[left],lists[right]);
+	ListNode* l1=domerge(lists,left,(left+right)/2);
+	ListNode* l2=domerge(lists,(left+right)/2+1,right);
+	return mergeTwoLists(l1,l2);
 }
 /**
  * Definition for singly-linked list.
@@ -71,3 +54,8 @@ public:
 		return domerge(lists,0,k-1);
     }
 };
+
+int main()
+{
+	
+}
