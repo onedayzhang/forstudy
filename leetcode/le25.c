@@ -20,16 +20,28 @@ struct ListNode* reverseKGroup(struct ListNode* head, int k) {
 class Solution {
 public:
     ListNode* reverseKGroup(ListNode* head, int k) {
-		ListNode* cur,next;
-		ListNode *pre=new ListNode(-1);
-		pre->next=head;
-		cur=head;
+        if(head==NULL||k==1) return head;
+		ListNode *cur,*next,*pre;
+		ListNode *prehead=new ListNode(-1);
+		prehead->next=head;
+		pre=prehead;
+        cur=prehead;
 		int num=0;
-		while(cur=cur->next) num++;
+		while(cur = cur->next) num++;
 		while(num>=k)
 		{
-			
+			cur=pre->next;
+			next=cur->next;
+			for(int i=1;i<k;i++)
+			{
+				cur->next=next->next;
+				next->next=pre->next;
+				pre->next=next;
+				next=cur->next;
+			}
+			pre=cur;
+			num-=k;
 		}
-		
+		return prehead->next;
     }
 };
